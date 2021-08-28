@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - .github/linters/.yaml-lint.yaml
-      - .github/workflows/test-diff.yaml
+      - .github/workflows/test-yamllint.yaml
 
 defaults:
   run:
@@ -25,4 +25,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run yamllint
-        run: yamllint -d "{extends: relaxed, rules: {line-length: disable}}" .github/
+        run: |
+          yamllint -d "{extends: relaxed, rules: {document-start: disable, line-length: disable, truthy: disable}}" .github/
