@@ -1,0 +1,27 @@
+name: test-workflow-dispatch
+
+on:
+  workflow_dispatch:
+    inputs:
+      accountid:
+        description: 'ID of the AWS account to deploy into'
+        required: true
+      region:
+        description: 'Target deployment region'
+        required: true
+        default: 'ap-southeast-2'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  echo-parameters:
+    name: parameters
+    runs-on: ubuntu-20.04
+    continue-on-error: false
+    steps:
+      - name: accountid ${{ github.event.inputs.accountid }}
+        run: echo
+      - name: region ${{ github.event.inputs.region }}
+        run: echo
