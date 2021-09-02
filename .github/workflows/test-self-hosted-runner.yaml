@@ -1,0 +1,37 @@
+name: test-self-hosted-runner
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploystage:
+        description: 'Which AWS account to deploy into [dev, prd]?'
+        required: true
+        default: 'dev'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test-self-hosted-runner:
+    name: Test self-hosted runner
+    runs-on: [self-hosted, linux]
+    env:
+      AWS_REGION: ap-southeast-2
+      AWS_ROLE_SESSION_NAME: GitHubActions
+      region: ap-southeast-2
+    strategy:
+      matrix:
+        accountid: ["123456789012"]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ${{ env.region }}
+          role-duration-seconds: 3600
+          role-skip-session-tagging: true
+          role-to-assume: arn:aws:iam::${{ env.accountid }}:role/k-ci-deploy
+
+      - run: python --version
