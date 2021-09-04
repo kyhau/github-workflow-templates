@@ -1,0 +1,49 @@
+name: test-setup-python
+
+on:
+  push:
+    paths:
+      - .github/workflows/test-setup-python.yaml
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  setup-python-using-action:
+    name: Setup Python with GitHub Action
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+    steps:
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: python --version
+
+setup-python-from-source:
+    name: Setup Python from source
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python 3.8
+        run: |
+          sudo yum install -y amazon-linux-extras
+          sudo amazon-linux-extras enable python3.8
+          sudo yum install -y python3.8
+
+      - name: Set up deployment environment
+        run: |
+          python3.8 -m pip install -U pip
+          echo "INFO: python3.8 version: $(python3.8 --version)"
+          echo "INFO: pip version: $(pip --version)"
+          echo "INFO: Creating virtualenv env"
+          python3.8 -m pip install --user virtualenv
+          python3.8 -m venv env
+
+      - name: Install requirements within venv
+        run: |
+          source env/bin/activate
+          echo "INFO: Activated venv: $(which python)"
+          deactivate
