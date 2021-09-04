@@ -3,7 +3,7 @@ name: test-environment-protection
 on:
   push:
     paths:
-      - .github/workflows/test-diff.yaml
+      - .github/workflows/test-environment-protection.yaml
 
 defaults:
   run:
