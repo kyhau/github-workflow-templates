@@ -1,17 +1,13 @@
-name: test-cdk-deploy
+name: test-environment-protection
 
 on:
   push:
     paths:
-      - .github/workflows/test-cdk-deploy.yaml
-
-defaults:
-  run:
-    shell: bash
+      - .github/linters/.yaml-lint.yaml
+      - .github/workflows/test-yamllint.yaml
 
 jobs:
-  job-1:
-    name: Running job-1
+  build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -27,5 +23,4 @@ jobs:
         run: |
           sudo npm install -g aws-cdk@next
           python -m pip install -U pip virtualenv
-          python --version
-
+          pip install -r requirements.txt
