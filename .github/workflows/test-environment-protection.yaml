@@ -3,24 +3,17 @@ name: test-environment-protection
 on:
   push:
     paths:
-      - .github/linters/.yaml-lint.yaml
-      - .github/workflows/test-yamllint.yaml
+      - .github/workflows/test-diff.yaml
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
-  build:
+  job-1:
+    environment:
+      name: production
+    name: Running job-1
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.8, 3.9]
-
     steps:
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Set up build environment
-        run: |
-          sudo npm install -g aws-cdk@next
-          python -m pip install -U pip virtualenv
-          pip install -r requirements.txt
+      - run: echo "Step 1"
