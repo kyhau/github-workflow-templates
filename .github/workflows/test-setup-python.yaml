@@ -23,7 +23,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: python --version
 
-setup-python-from-source:
+  setup-python-from-source:
     name: Setup Python from source
     runs-on: ubuntu-latest
     steps:
