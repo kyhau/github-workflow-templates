@@ -10,20 +10,39 @@ defaults:
     shell: bash
 
 jobs:
+  mask-before-init:
+    runs-on: ubuntu-latest
+    steps:
+      - name: JOB_1_VAR
+        run: |
+          echo "::add-mask::$JOB_1_VAR"
+
   test-add-mask-env:
     name: Test add-mask on env
     runs-on: ubuntu-latest
     env:
-      VAR_1: val_1_value
+      JOB_1_VAR: job_1_val_value
+      JOB_2_VAR: job_2_val_value
     steps:
-      - name: Running step 1
+      - name: JOB_1_VAR is not masked
         run: |
-          echo "::add-mask::$VAR_1"
+          echo "::add-mask::$JOB_1_VAR"
 
-      - name: Running step 2
-        if: ${{ always() }}
+      - name: Expected JOB_1_VAR is masked
         run: |
-          echo "$VAR_1"
+          echo "$JOB_1_VAR"
+
+  test-add-mask-env-2:
+    name: Test add-mask on env 2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set the value
+        run: |
+          echo "::add-mask::$action_state"
+          echo "action_state=yellow" >> $GITHUB_ENV
+      - name: Use the value
+        run: |
+          echo "${{ env.action_state }}" # This will output 'yellow'
 
   test-add-mask-step-output:
     name: Test add-mask on step output
