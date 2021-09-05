@@ -10,12 +10,12 @@ defaults:
     shell: bash
 
 jobs:
-  job-1:
-    name: Running job-1
+  deploy-cdk-app:
+    name: Deploy CDK App
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.9]
+        python-version: [3.9]
 
     steps:
       - name: Set up Python ${{ matrix.python-version }}
@@ -23,9 +23,27 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Set up build environment
+      - name: Set up CDK v2
         run: |
+          curl -sL https://rpm.nodesource.com/setup_14.x | sudo bash -
+          sudo apt-get install -y nodejs
           sudo npm install -g aws-cdk@next
-          python -m pip install -U pip virtualenv
-          python --version
 
+      - name: Set up deployment environment
+        run: |
+          python3 -m pip install -U pip
+          echo "INFO: cdk version: $(cdk --version)"
+          echo "INFO: python3 version: $(python3 --version)"
+          echo "INFO: pip version: $(pip --version)"
+          echo "INFO: Creating virtualenv env"
+          python3 -m pip install --user virtualenv
+          python3 -m venv env
+
+      - name: Install requirements
+        run: |
+          source env/bin/activate
+          echo "INFO: Activated venv: $(which python)"
+          echo "TODO: pip install"
+          deactivate
+
+      # cdk deploy ${{ env.APP_NAME }} --require-approval never
