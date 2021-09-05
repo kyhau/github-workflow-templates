@@ -1,0 +1,39 @@
+name: test-add-mask
+
+on:
+  push:
+    paths:
+      - .github/workflows/test-add-mask.yaml
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test-add-mask-env:
+    name: Test add-mask on env
+    runs-on: ubuntu-latest
+    env:
+      VAR_1: val_1_value
+    steps:
+      - name: Running step 1
+        run: |
+          echo "::add-mask::$VAR_1"
+
+      - name: Running step 2
+        if: ${{ always() }}
+        run: |
+          echo "$VAR_1"
+
+  test-add-mask-step-output:
+    name: Test add-mask on step output
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    steps:
+      - id: VpcInfo
+        run: |
+          echo "::set-output name=vpcid::vpc-11111111"
+      - run: |
+          echo "::add-mask::${{ steps.VpcInfo.outputs.vpcid }}"
+      - run: |
+          echo ${{ steps.VpcInfo.outputs.vpcid }}
