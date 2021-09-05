@@ -16,11 +16,16 @@ jobs:
     env:
       JOB_1_VAR: job_1_val_value
     steps:
-      - name: Mask the env
+      - name: Use the env (output ***)
         run: |
           echo "::add-mask::$JOB_1_VAR"
+          echo "$JOB_1_VAR"
 
-      - name: Use the env
+  test-add-mask-env-2:
+    name: Test add-mask on env
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use JOB_1_VAR env
         run: |
           echo "$JOB_1_VAR"
 
@@ -30,12 +35,10 @@ jobs:
     steps:
       - name: Set the value
         run: |
-          echo "action_state=$(ls)" >> $GITHUB_ENV
-      - name: Mask the value
-        run: |
-          echo "::add-mask::$action_state"
+          echo "action_state=yellow" >> $GITHUB_ENV
       - name: Use the value
         run: |
+          echo "::add-mask::$action_state"
           echo "${{ env.action_state }}"
 
   test-add-mask-step-output:
@@ -47,9 +50,7 @@ jobs:
         id: VpcInfo
         run: |
           echo "::set-output name=vpcid::vpc-11111111"
-      - name: Mask the value
-        run: |
-          echo "::add-mask::${{ steps.VpcInfo.outputs.vpcid }}"
       - name: Use the value (output ***)
         run: |
+          echo "::add-mask::${{ steps.VpcInfo.outputs.vpcid }}"
           echo ${{ steps.VpcInfo.outputs.vpcid }}
