@@ -18,8 +18,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Install cfn-lint
+        run: |
+          pip install cfn-lint
+
       - name: Run cfn-lint
         run: |
           cp .github/linters/.cfnlintrc .
-          pip install cfn-lint
           cfn-lint ./test-cfn-lint/*
