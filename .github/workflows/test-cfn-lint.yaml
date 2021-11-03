@@ -22,4 +22,4 @@ jobs:
         run: |
           cp .github/linters/.cfnlintrc .
           pip install cfn-lint
-          cfn-lint
+          cfn-lint ./test-cfn-lint/*
