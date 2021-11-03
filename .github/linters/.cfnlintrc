@@ -1,0 +1,8 @@
+templates:
+- cloudformation/*.json
+- cloudformation/*.yaml
+- cloudformation/*.yml
+
+ignore_checks:
+- E1019
+# E1019: Parameter stageVariables.sfnArn for Fn::Sub not found at ...

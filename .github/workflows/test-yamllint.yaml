@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run yamllint
-        run: yamllint -c ./.github/linters/.yaml-lint.yaml .github/
+        run: yamllint -c .github/linters/.yaml-lint.yml .github/
 
   lint-without-config:
     name: Run yamllint without config
