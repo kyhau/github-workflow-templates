@@ -15,7 +15,7 @@ defaults:
 jobs:
   job-1:
     name: Running job-1
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - id: VpcInfo
         run: |

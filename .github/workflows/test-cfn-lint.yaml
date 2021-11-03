@@ -1,0 +1,28 @@
+name: test-cfn-lint
+
+on:
+  push:
+    paths:
+      - .github/workflows/.cfnlintrc
+      - .github/workflows/test-cfn-lint.yaml
+      - cloudformation/
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  lint:
+    name: Run cfn-lint with common config
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install cfn-lint
+        run: |
+          pip install cfn-lint
+
+      - name: Run cfn-lint
+        run: |
+          cp .github/linters/.cfnlintrc .
+          cfn-lint ./test-cfn-lint/*
