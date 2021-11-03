@@ -11,7 +11,8 @@
                     "ErrorDocument": "error.html"
                 }
             },
-            "DeletionPolicy": "Retain"
+            "DeletionPolicy": "Retain",
+            "UpdateReplacePolicy": "Retain"
         }
     },
     "Outputs": {

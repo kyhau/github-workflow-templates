@@ -11,6 +11,7 @@ Resources:
         IndexDocument: index.html
         ErrorDocument: error.html
     DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
 Outputs:
   WebsiteURL:
     Value: !GetAtt 'S3Bucket.WebsiteURL'

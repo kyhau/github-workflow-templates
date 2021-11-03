@@ -13,15 +13,15 @@ defaults:
 jobs:
   lint:
     name: Run yamllint with common config
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Run yamllint
-        run: yamllint -c .github/linters/.yaml-lint.yml .github/
+        run: yamllint -c .github/linters/.yaml-lint.yaml .github/
 
   lint-without-config:
     name: Run yamllint without config
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Run yamllint
