@@ -5,7 +5,7 @@ on:
     paths:
       - .github/workflows/.cfnlintrc
       - .github/workflows/test-cfn-lint.yaml
-      - cloudformation/
+      - test-cfn-lint/
 
 defaults:
   run:
