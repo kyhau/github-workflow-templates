@@ -13,6 +13,7 @@ jobs:
   job-1:
     environment:
       name: production
+      url: https://github.com/kyhau/github-workflow-templates
     name: Running job-1
     runs-on: ubuntu-latest
     steps:
