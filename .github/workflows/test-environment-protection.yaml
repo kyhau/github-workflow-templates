@@ -14,7 +14,14 @@ jobs:
     environment:
       name: production
       url: https://github.com/kyhau/github-workflow-templates
-    name: Running job-1
+    name: Has environmentc, env secret available
     runs-on: ubuntu-latest
     steps:
       - run: echo "Step 1"
+      - run: echo ${{ secrets.TEST_ENV_SECRET }}
+  job-2:
+    name: No environment, env secret not available
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ secrets.TEST_ENV_SECRET }}
+  
