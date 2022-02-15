@@ -17,7 +17,6 @@ jobs:
     name: Has environmentc, env secret available
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Step 1"
       - run: echo ${{ secrets.TEST_ENV_SECRET }}
   job-2:
     name: No environment, env secret not available
