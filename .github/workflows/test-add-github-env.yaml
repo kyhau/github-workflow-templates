@@ -1,5 +1,4 @@
-name: test-multi-set-output
-
+name: test-add-github-env
 on:
   workflow_dispatch:
     inputs:
