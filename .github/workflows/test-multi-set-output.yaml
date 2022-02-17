@@ -33,3 +33,17 @@ jobs:
       - run: |
           echo ${{ steps.VpcInfo.outputs.subnetid }}
           echo ${{ steps.VpcInfo.outputs.vpcid }}
+  job-2:
+    name: Running job-2
+    runs-on: ubuntu-latest
+    steps:
+      - id: StackNameVariant
+        run: |
+          if [[ "${{ github.event.inputs.deploystage }}" != "prd" ]]
+          then
+            echo "::set-output name=suffix::-dev"
+          else
+            echo "::set-output name=suffix::-dev"
+          fi
+      - run: |
+          echo ${{ steps.StackNameVariant.outputs.suffix }}
