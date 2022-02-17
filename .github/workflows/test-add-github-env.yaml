@@ -1,7 +1,6 @@
 name: test-multi-set-output
 
 on:
-  push
   workflow_dispatch:
     inputs:
       deploystage:
