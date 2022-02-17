@@ -43,7 +43,7 @@ jobs:
           then
             echo "::set-output name=suffix::-dev"
           else
-            echo "::set-output name=suffix::-dev"
+            echo "::set-output name=suffix::"
           fi
       - run: |
           echo ${{ steps.StackNameVariant.outputs.suffix }}
