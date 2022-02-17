@@ -46,4 +46,4 @@ jobs:
             echo "::set-output name=suffix::"
           fi
       - run: |
-          echo ${{ steps.StackNameVariant.outputs.suffix }}
+          echo "hello${{ steps.StackNameVariant.outputs.suffix }}world
