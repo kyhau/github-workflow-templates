@@ -66,6 +66,9 @@ jobs:
             LambdaPackage=${{ steps.LambdaPackageExampleFunction.outputs.S3Key }}
           tags: '[
             {"Key": "Billing", "Value": "k-example-api"},
+            {"Key": "Branch", "Value": "${{ github.ref }}"},
+            {"Key": "Hash", "Value": "${{ github.sha }}"},
+            {"Key": "LastDeployUser", "Value": "${{ github.actor }}"},
             {"Key": "Repository", "Value": "https://github.com/kyhau/github-workflow-templates"}
           ]'
 
