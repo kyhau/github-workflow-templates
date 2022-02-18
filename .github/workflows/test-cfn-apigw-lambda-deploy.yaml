@@ -1,0 +1,75 @@
+name: test--deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      accountid:
+        description: 'AWS account ID to deploy into'
+        required: true
+      bucketname:
+        description: 'Bucket name'
+        required: true
+      region:
+        description: 'Target deployment region'
+        required: true
+        default: 'ap-southeast-2'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  deploy-cfn-apigw-lambda:
+    name: Deploy CFN stack
+    runs-on: [self-hosted, linux, python3]
+    env:
+      AWS_ROLE_SESSION_NAME: GitHubActions
+      accountid: ${{ github.event.inputs.accountid }}
+      bucketname: ${{ github.event.inputs.bucketname }}
+      region: ap-southeast-2
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ${{ env.region }}
+          role-duration-seconds: 3600
+          role-skip-session-tagging: true
+          role-to-assume: arn:aws:iam::${{ env.accountid }}:role/ci-github
+
+      - name: Run unit tests
+        run: |
+          python lambda/example-function.test.py
+
+      - name: Package and upload example-function Lambda function to S3
+        id: LambdaPackageExampleFunction
+        run: |
+          zip_filename=example-function-$(git rev-parse --short HEAD).zip
+          s3_obj_key=app/example/${zip_filename}
+          zip -j ${zip_filename} ./lambda/example-function.py
+          aws s3 cp ${zip_filename} s3://${{ env.bucket-name }}/${s3_obj_key}
+          echo "::set-output name=S3Key::${s3_obj_key}"
+
+      - name: Remove lambda archives
+        run: rm -f *.zip
+
+      - name: Deploy main stack
+        uses: aws-actions/aws-cloudformation-github-deploy@v1
+        with:
+          name: k-example-api
+          template: ./cf/example-app.yaml
+          capabilities: CAPABILITY_NAMED_IAM
+          no-fail-on-empty-changeset: 1
+          parameter-overrides: >-
+            ApiGatewayStageName=v1,
+            LambdaBucketName=${{ env.bucketname }},
+            LambdaPackage=${{ steps.LambdaPackageExampleFunction.outputs.S3Key }}
+          tags: '[
+            {"Key": "Billing", "Value": "k-example-api"},
+            {"Key": "Repository", "Value": "https://github.com/kyhau/github-workflow-templates"}
+          ]'
+
+      - name: Create new APIGW deployment
+        run: |
+          APIGW_ID=$(aws cloudformation list-exports --query "Exports[?Name=='k-example-api:ApiId'].Value" --output text)
+          aws apigateway create-deployment --rest-api-id ${APIGW_ID} --stage-name v1 --description "Deployed $(git rev-parse --short HEAD)"
