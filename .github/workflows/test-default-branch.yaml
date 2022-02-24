@@ -2,7 +2,7 @@ name: test-default-branch
 
 on:
   push:
-    branches: [ $default-branch ]
+    branches: [$default-branch]
     paths:
       - .github/workflow/test-default-branch.yaml
 
@@ -12,8 +12,7 @@ defaults:
 
 jobs:
   lint:
-    name: Run yamllint with common config
+    name: Run a job
     runs-on: ubuntu-latest
     steps:
       - run: echo "Do something"
-      
