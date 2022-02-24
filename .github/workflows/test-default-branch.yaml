@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - .github/workflow/test-default-branch.yaml
+      - .github/workflows/test-default-branch.yaml
 
 defaults:
   run:
