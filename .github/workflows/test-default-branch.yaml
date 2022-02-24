@@ -3,7 +3,7 @@ name: test-default-branch
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - .github/workflow/test-default-branch.yaml
 
@@ -16,4 +16,4 @@ jobs:
     name: Run a job
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Do something: ${{ github.event.repository.default_branch }}"
+      - run: echo "Do something"
