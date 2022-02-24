@@ -3,7 +3,7 @@ name: test-default-branch
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - .github/workflows/test-default-branch.yaml
 
