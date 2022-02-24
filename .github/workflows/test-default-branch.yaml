@@ -3,7 +3,7 @@ name: test-default-branch
 on:
   push:
     branches:
-      - ${{ github.event.repository.default_branch }}
+      - master
     paths:
       - .github/workflows/test-default-branch.yaml
 
