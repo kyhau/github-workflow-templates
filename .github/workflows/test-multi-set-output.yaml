@@ -34,12 +34,15 @@ jobs:
 
   echo-common:
     name: Using values from diff job
+    env:
+      environment2: ${{needs.common.outputs.environment}}
     runs-on: ubuntu-latest
     needs: common
     steps:
       - run: |
           echo environment=${{needs.common.outputs.environment}}
           echo stacksuffix=${{needs.common.outputs.stacksuffix}}
+          echo environment2=${{env.environment2}}
 
   tests-share-btw-steps-1:
     name: Sharing values with other steps in the same job
