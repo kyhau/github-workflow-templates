@@ -1,5 +1,4 @@
 name: test-if-conditions
-
 on:
   workflow_dispatch:
     inputs:
@@ -7,13 +6,11 @@ on:
         description: 'Which AWS account to deploy into [dev, prd]?'
         required: true
         default: 'dev'
-
 defaults:
   run:
     shell: bash
 
 jobs:
-
   in-step-run:
     name: Check if-condition in step
     runs-on: ubuntu-latest
@@ -31,4 +28,3 @@ jobs:
       - run: |
           echo ${{ steps.vars.outputs.environment }}
           echo ${{ steps.vars.outputs.stacksuffix }}
-
