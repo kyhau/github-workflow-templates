@@ -13,14 +13,13 @@ on:
       stage:
         description: Deployment stage
         type: choice
+        default: prd
         options:
           - dev
           - prd
-        required: true
       use-emoji:
         description: Include 🎉🤣 emojis
         type: boolean
-        required: true
       environment:
         description: Environment to run tests against
         type: environment
