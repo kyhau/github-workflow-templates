@@ -44,15 +44,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: [echo-parameters]
     steps:
-      - if: ${{ github.event.inputs.use-emoji == "true" }}
+      - if: ${{ github.event.inputs.use-emoji == true }}
         run: |
           echo INFO: use-emoji = true
-      - if: ${{ github.event.inputs.use-emoji == "false" }}
+      - if: ${{ github.event.inputs.use-emoji == false }}
         run: |
           echo INFO: use-emoji = false
-      - if: ${{ github.event.inputs.use-emoji == "True" }}
+      - if: ${{ github.event.inputs.use-emoji == True }}
         run: |
           echo INFO: use-emoji = True
-      - if: ${{ github.event.inputs.use-emoji == "False" }}
+      - if: ${{ github.event.inputs.use-emoji == False }}
         run: |
           echo INFO: use-emoji = False
