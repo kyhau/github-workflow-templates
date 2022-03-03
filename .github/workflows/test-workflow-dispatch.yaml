@@ -50,9 +50,3 @@ jobs:
       - if: ${{ github.event.inputs.use-emoji == false }}
         run: |
           echo INFO: use-emoji = false
-      - if: ${{ github.event.inputs.use-emoji == True }}
-        run: |
-          echo INFO: use-emoji = True
-      - if: ${{ github.event.inputs.use-emoji == False }}
-        run: |
-          echo INFO: use-emoji = False
