@@ -1,0 +1,34 @@
+name: test-if-conditions
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploystage:
+        description: 'Which AWS account to deploy into [dev, prd]?'
+        required: true
+        default: 'dev'
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+
+  in-step-run:
+    name: Check if-condition in step
+    runs-on: ubuntu-latest
+    steps:
+      - id: vars
+        # if [[ "${{ github.ref }}" == "refs/heads/master" ]]; then
+        run: |
+          if [[ "${{ github.event.inputs.deploystage }}" == "prd" ]]; then
+            echo "::set-output name=environment::prd"
+            echo "::set-output name=stacksuffix::"
+          else
+            echo "::set-output name=environment::dev"
+            echo "::set-output name=stacksuffix::-dev"
+          fi
+      - run: |
+          echo ${{ steps.vars.outputs.environment }}
+          echo ${{ steps.vars.outputs.stacksuffix }}
+
