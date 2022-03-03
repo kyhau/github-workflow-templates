@@ -11,6 +11,14 @@ defaults:
     shell: bash
 
 jobs:
+  at-step:
+    name: Check if-condition in step
+    runs-on: ubuntu-latest
+    steps:
+      - if: ${{ github.ref != 'refs/heads/master' }}
+        run: |
+          echo This is a branch - ${{ github.ref }}
+
   in-step-run:
     name: Check if-condition in step
     runs-on: ubuntu-latest

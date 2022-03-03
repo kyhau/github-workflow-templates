@@ -64,7 +64,7 @@ jobs:
       - run: |
           echo ${{ steps.VpcInfo.outputs.subnetid }}
           echo ${{ steps.VpcInfo.outputs.vpcid }}
-          
+
   test-empty-value:
     name: Test passing empty value
     runs-on: ubuntu-latest
