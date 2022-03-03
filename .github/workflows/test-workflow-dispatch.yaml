@@ -4,11 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       accountid:
-        description: ID of the AWS account to deploy into
-        required: true
+        description: Account ID (optional)
       region:
         description: Target deployment region
-        default: 'ap-southeast-2'
+        default: ap-southeast-2
         required: true
       stage:
         description: Deployment stage
@@ -44,9 +43,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [echo-parameters]
     steps:
-      - if: ${{ github.event.inputs.use-emoji == true }}
+      - if: ${{ github.event.inputs.use-emoji == 'true' }}
         run: |
           echo INFO: use-emoji = true
-      - if: ${{ github.event.inputs.use-emoji == false }}
+      - if: ${{ github.event.inputs.use-emoji == 'false' }}
         run: |
           echo INFO: use-emoji = false
