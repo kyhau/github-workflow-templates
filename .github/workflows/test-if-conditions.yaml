@@ -12,7 +12,7 @@ defaults:
 
 jobs:
   at-step:
-    name: Check if-condition in step
+    name: Run a step if branch is something
     runs-on: ubuntu-latest
     steps:
       - if: ${{ github.ref != 'refs/heads/master' }}
@@ -20,7 +20,7 @@ jobs:
           echo This is a branch - ${{ github.ref }}
 
   in-step-run:
-    name: Check if-condition in step
+    name: Check if-condition inside a step run
     runs-on: ubuntu-latest
     steps:
       - id: vars
