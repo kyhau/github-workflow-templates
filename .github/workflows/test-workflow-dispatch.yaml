@@ -4,12 +4,27 @@ on:
   workflow_dispatch:
     inputs:
       accountid:
-        description: 'ID of the AWS account to deploy into'
+        description: ID of the AWS account to deploy into
         required: true
       region:
-        description: 'Target deployment region'
-        required: true
+        description: Target deployment region
         default: 'ap-southeast-2'
+        required: true
+      stage:
+        description: Deployment stage
+        type: choice
+        options:
+          - dev
+          - prd
+        required: true
+      use-emoji:
+        description: Include 🎉🤣 emojis
+        type: boolean
+        required: true
+      environment:
+        description: Environment to run tests against
+        type: environment
+        required: true
 
 defaults:
   run:
@@ -24,4 +39,10 @@ jobs:
       - name: accountid ${{ github.event.inputs.accountid }}
         run: echo
       - name: region ${{ github.event.inputs.region }}
+        run: echo
+      - name: region ${{ github.event.inputs.stage }}
+        run: echo
+      - name: region ${{ github.event.inputs.use-emoji }}
+        run: echo
+      - name: region ${{ github.event.inputs.environment }}
         run: echo
