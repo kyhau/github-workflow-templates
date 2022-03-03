@@ -31,7 +31,6 @@ defaults:
 
 jobs:
   echo-parameters:
-    name: parameters
     runs-on: ubuntu-latest
     continue-on-error: false
     steps:
@@ -39,9 +38,25 @@ jobs:
         run: echo
       - name: region ${{ github.event.inputs.region }}
         run: echo
-      - name: region ${{ github.event.inputs.stage }}
+      - name: stage ${{ github.event.inputs.stage }}
         run: echo
-      - name: region ${{ github.event.inputs.use-emoji }}
+      - name: use-emoji ${{ github.event.inputs.use-emoji }}
         run: echo
-      - name: region ${{ github.event.inputs.environment }}
+      - name: environment ${{ github.event.inputs.environment }}
         run: echo
+
+  test-boolean-input:
+    runs-on: ubuntu-latest
+    steps:
+      - if: ${{ github.event.inputs.use-emoji == "true" }}
+        run: |
+          echo INFO: use-emoji = true
+      - if: ${{ github.event.inputs.use-emoji == "false" }}
+        run: |
+          echo INFO: use-emoji = false
+      - if: ${{ github.event.inputs.use-emoji == "True" }}
+        run: |
+          echo INFO: use-emoji = True
+      - if: ${{ github.event.inputs.use-emoji == "False" }}
+        run: |
+          echo INFO: use-emoji = False
