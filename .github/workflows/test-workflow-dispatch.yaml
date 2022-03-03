@@ -34,19 +34,15 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: false
     steps:
-      - name: accountid ${{ github.event.inputs.accountid }}
-        run: echo
-      - name: region ${{ github.event.inputs.region }}
-        run: echo
-      - name: stage ${{ github.event.inputs.stage }}
-        run: echo
-      - name: use-emoji ${{ github.event.inputs.use-emoji }}
-        run: echo
-      - name: environment ${{ github.event.inputs.environment }}
-        run: echo
+      - run: echo accountid ${{ github.event.inputs.accountid }}
+      - run: echo region ${{ github.event.inputs.region }}
+      - run: echo stage ${{ github.event.inputs.stage }}
+      - run: echo use-emoji ${{ github.event.inputs.use-emoji }}
+      - run: echo environment ${{ github.event.inputs.environment }}
 
   test-boolean-input:
     runs-on: ubuntu-latest
+    needs: [echo-parameters]
     steps:
       - if: ${{ github.event.inputs.use-emoji == "true" }}
         run: |
