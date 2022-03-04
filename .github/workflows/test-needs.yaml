@@ -1,0 +1,20 @@
+name: test-if-conditions
+on:
+  push:
+    paths:
+      - .github/workflows/test-needs.yaml
+defaults:
+  run:
+    shell: bash
+jobs:
+  job-1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "step 1"
+
+  job-2:
+    needs: [job-1]
+
+  job-3:
+    needs: [job-2]
+
