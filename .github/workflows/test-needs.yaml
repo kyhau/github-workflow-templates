@@ -14,7 +14,10 @@ jobs:
 
   job-2:
     needs: [job-1]
+    steps:
+      - run: echo "step 1"
 
   job-3:
     needs: [job-2]
-
+    steps:
+          - run: echo "step 1"
