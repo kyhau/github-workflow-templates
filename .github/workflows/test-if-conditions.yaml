@@ -18,15 +18,22 @@ defaults:
     shell: bash
 
 jobs:
+  at-job:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo Do something on this branch ${{ github.ref }} only for prd
+
   at-step:
     name: Run a step if branch is something
     runs-on: ubuntu-latest
     steps:
-      - if: ${{ github.ref != 'refs/heads/master' }}
+      - if: ${{ github.ref != 'refs/heads/main' }}
         run: |
           echo This is a branch - ${{ github.ref }}
 
-      - if: ${{ (github.ref != 'refs/heads/master') && (github.event.inputs.deploystage == 'prd') }}
+      - if: ${{ (github.ref != 'refs/heads/main') && (github.event.inputs.deploystage == 'prd') }}
         run: |
           echo Do something on this branch ${{ github.ref }} only for prd
 
@@ -35,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: vars
-        # if [[ "${{ github.ref }}" == "refs/heads/master" ]]; then
+        # if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
         run: |
           if [[ "${{ github.event.inputs.deploystage }}" == "prd" ]]; then
             echo "::set-output name=environment::prd"
