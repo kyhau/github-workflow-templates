@@ -22,7 +22,7 @@ jobs:
       stacksuffix: ${{ steps.vars.outputs.stacksuffix }}
     steps:
       - id: vars
-        # if [[ "${{ github.ref }}" == "refs/heads/master" ]]; then
+        # if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
         run: |
           if [[ "${{ github.event.inputs.deploystage }}" == "prd" ]]; then
             echo "::set-output name=environment::prd"
