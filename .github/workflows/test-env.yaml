@@ -8,7 +8,7 @@ jobs:
   log-env:
     runs-on: ubuntu-20.04
     env:
-      JOB_ENV: Available on all steps 
+      JOB_ENV: Available on all steps
     steps:
       - name: Log env variables
         env:
