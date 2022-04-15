@@ -1,10 +1,11 @@
 name: test-env
 
 on:
-  workflow_dispatch:
   push:
     paths:
       - .github/workflows/test-diff.yaml
+  workflow_call:
+  workflow_dispatch:
 
 env:
   WF_ENV: Available on all jobs
