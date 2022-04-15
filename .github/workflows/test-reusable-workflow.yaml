@@ -6,10 +6,6 @@ on:
       - .github/workflows/test-reusable-workflow.yaml
   workflow_dispatch:
 
-defaults:
-  run:
-    shell: bash
-
 jobs:
   test-reusable-workflow:
     runs-on: ubuntu-latest
