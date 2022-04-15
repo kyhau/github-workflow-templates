@@ -1,6 +1,10 @@
 name: test-action-xt0rted-slash-command-action
 
-on: issue_comment
+on:
+  issue_comment:
+    types: [created]
+    #paths:
+    #  - .github/workflows/test-add-mask.yaml
 
 jobs:
   check_comments:
