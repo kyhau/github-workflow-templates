@@ -1,10 +1,12 @@
 name: test-action-xt0rted-slash-command-action
 
+# Testing
+# 1. Create a PR, e.g. https://github.com/kyhau/github-workflow-templates/pull/2
+# 2. Put a new comment: /test dev debug
+
 on:
   issue_comment:
     types: [created]
-    #paths:
-    #  - .github/workflows/test-add-mask.yaml
 
 jobs:
   check_comments:
