@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - .github/workflows/test-matrix.yaml
+  workflow_dispatch:
 
 defaults:
   run:

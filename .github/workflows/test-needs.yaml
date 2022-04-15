@@ -4,9 +4,12 @@ on:
   push:
     paths:
       - .github/workflows/test-needs.yaml
+  workflow_dispatch:
+
 defaults:
   run:
     shell: bash
+
 jobs:
   job-1:
     runs-on: ubuntu-latest

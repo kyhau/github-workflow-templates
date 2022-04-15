@@ -6,6 +6,7 @@ on:
       - .github/workflows/.cfnlintrc
       - .github/workflows/test-cfn-lint.yaml
       - test-cfn-lint/
+  workflow_dispatch:
 
 defaults:
   run:

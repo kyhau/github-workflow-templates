@@ -5,6 +5,7 @@ on:
     paths:
       - .github/linters/.yaml-lint.yaml
       - .github/workflows/test-yamllint.yaml
+  workflow_dispatch:
 
 defaults:
   run:
