@@ -1,4 +1,6 @@
 name: test-needs
+
+on:
   push:
     paths:
       - .github/workflows/test-needs.yaml
