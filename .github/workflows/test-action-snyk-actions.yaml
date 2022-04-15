@@ -1,0 +1,19 @@
+name: test-action-snyk-actions
+
+# All Snyk GitHub Actions support integration with GitHub Code Scanning to show vulnerability information in the GitHub Security tab.
+
+on:
+  push:
+    paths:
+      - .github/workflows/ttest-action-snyk-actions.yaml
+  workflow_dispatch:
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/python@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
