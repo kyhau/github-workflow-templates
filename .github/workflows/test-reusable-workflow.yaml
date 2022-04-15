@@ -8,11 +8,10 @@ on:
 
 jobs:
   test-reusable-workflow:
-    runs-on: ubuntu-latest
     # Notes:
-    # 1. "uses" is added at job level, not step level.
-    # 2. "uses" cannot be used with `steps`
-    # 3. "workflow_call:" is added in test-env.yaml.
+    # 1. `uses` is added at job level, not step level.
+    # 2. `uses` cannot be used with `steps` and `runs-on`.
+    # 3. `workflow_call:`` is added in test-env.yaml.
     # Syntax
     # uses: USER_OR_ORG_NAME/REPO_NAME/.github/workflows/REUSABLE_WORKFLOW_FILE.yml@TAG_OR_BRANCH
     uses: kyhau/github-workflow-templates/.github/workflows/test-env.yaml@main
