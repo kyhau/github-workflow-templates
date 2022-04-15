@@ -10,7 +10,6 @@ jobs:
   test-reusable-workflow:
     runs-on: ubuntu-latest
     # uses: USER_OR_ORG_NAME/REPO_NAME/.github/workflows/REUSABLE_WORKFLOW_FILE.yml@TAG_OR_BRANCH
-    # at job level, not step level
+    # "uses" is added at job level, not step level.
+    # "uses" cannot be used with `steps`
     uses: kyhau/github-workflow-templates/.github/workflows/test-env.yaml@main
-    steps:
-      - run: echo "Hello World"
