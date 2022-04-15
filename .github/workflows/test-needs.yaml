@@ -1,5 +1,4 @@
-name: test-if-conditions
-on:
+name: test-needs
   push:
     paths:
       - .github/workflows/test-needs.yaml
