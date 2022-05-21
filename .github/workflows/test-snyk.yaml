@@ -1,7 +1,7 @@
 name: test-snyk
 on: push
 jobs:
-  snyk-python:
+  security:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
