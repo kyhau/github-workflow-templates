@@ -1,0 +1,37 @@
+name: check-disk-space
+
+# Source https://github.com/iliana/there-are-too-many-things-in-the-computer-box/blob/main/.github/workflows/disk-space.yml
+
+on:
+  push:
+    paths:
+      - .github/workflows/check-disk-space.yaml
+  workflow_dispatch:
+
+jobs:
+  disk-space:
+    runs-on: ubuntu-latest
+    steps:
+      - run: dpkg-query -Wf '${Installed-Size}\t${Package}\n' | sort -rn
+      - run: sudo du -chxd 5 / 2>/dev/null | sort -rh | head -n 100
+      - run: |
+          set -x
+          sudo systemctl stop docker
+          sudo rm -rf /etc/skel/.rustup
+          sudo rm -rf /home/linuxbrew/.linuxbrew
+          sudo rm -rf /opt/az
+          sudo rm -rf /opt/hostedtoolcache
+          sudo rm -rf /opt/microsoft
+          sudo rm -rf /usr/lib/google-cloud-sdk
+          sudo rm -rf /usr/lib/jvm
+          sudo rm -rf /usr/local/.ghcup
+          sudo rm -rf /usr/local/graalvm
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /usr/local/lib/node_modules
+          sudo rm -rf /usr/local/share/chromium
+          sudo rm -rf /usr/local/share/powershell
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/share/swift
+          sudo rm -rf /var/lib/docker
+          df -h /
+      - run: sudo du -chxd 5 / 2>/dev/null | sort -rh | head -n 100
