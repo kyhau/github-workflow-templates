@@ -5,7 +5,7 @@ name: test-action-snyk-actions
 on:
   push:
     paths:
-      - .github/workflows/ttest-action-snyk-actions.yaml
+      - .github/workflows/test-action-snyk-actions.yaml
   workflow_dispatch:
 
 jobs:
