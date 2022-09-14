@@ -1,0 +1,19 @@
+name: test-inputs
+on:
+  workflow_dispatch:
+    inputs:
+      snapshotid:
+        description: If restoring DB provide RDS snapshot id
+        required: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  job-1:
+    name: Running job-1
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo Hello-${{ env.snapshotid }}-world
