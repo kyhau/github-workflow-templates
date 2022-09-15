@@ -1,0 +1,13 @@
+name: Test Badge 2
+
+on:
+  push:
+    paths:
+      - .github/workflows/test-badge-2.yaml
+  workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo
