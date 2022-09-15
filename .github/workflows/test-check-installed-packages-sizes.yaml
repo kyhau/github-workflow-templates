@@ -1,13 +1,13 @@
-name: check-installed-pacakges-sizes
+name: test-check-installed-packages-sizes
 
 on:
   push:
     paths:
-      - .github/workflows/check-installed-pacakges-sizes.yaml
+      - .github/workflows/test-check-installed-packages-sizes.yaml
   workflow_dispatch:
 
 jobs:
-  check-installed-pacakges-sizes:
+  check-installed-packages-sizes:
     runs-on: ubuntu-latest
     steps:
       - run: dpkg-query -Wf '${Installed-Size}\t${Package}\n' | sort -rn
