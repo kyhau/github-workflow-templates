@@ -19,6 +19,7 @@ defaults:
 
 jobs:
   at-job:
+    name: Test if-condition at job
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
@@ -26,19 +27,31 @@ jobs:
           echo Do something on this branch ${{ github.ref }} only for prd
 
   at-step:
-    name: Run a step if branch is something
+    name: Test if-condition at step
     runs-on: ubuntu-latest
     steps:
-      - if: ${{ github.ref != 'refs/heads/main' }}
+      - name: Test step if main branch
+        if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           echo This is a branch - ${{ github.ref }}
 
-      - if: ${{ (github.ref != 'refs/heads/main') && (github.event.inputs.deploystage == 'prd') }}
+      - name: Test step if non main branch
+        if: ${{ github.ref != 'refs/heads/main' }}
+        run: |
+          echo This is a branch - ${{ github.ref }}
+
+      - name: Test step multi conditions main and prd
+        if: ${{ (github.ref == 'refs/heads/main') && (github.event.inputs.deploystage == 'prd') }}
+        run: |
+          echo Do something on this branch ${{ github.ref }} only for prd
+
+      - name: Test step multi conditions with always and prd
+        if: ${{ always() && github.event.inputs.deploystage == 'prd' }}
         run: |
           echo Do something on this branch ${{ github.ref }} only for prd
 
   in-step-run:
-    name: Check if-condition inside a step run
+    name: Test if-condition inside a step run
     runs-on: ubuntu-latest
     steps:
       - id: vars
