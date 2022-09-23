@@ -1,6 +1,9 @@
 name: test-publish-container-image
 on:
   push:
+    branches: [release]
+  release:
+    types: [published]
   workflow_dispatch:
 
 defaults:
