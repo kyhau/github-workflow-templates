@@ -1,6 +1,6 @@
 name: test-run-name
 
-run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
+run-name: Deploy ${{ github.ref_name }} to stage(${{ inputs.deploy_target }}) by @${{ github.actor }}
 
 on:
   push:
