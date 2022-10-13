@@ -1,0 +1,30 @@
+name: test-run-name
+
+run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/test-run-name.yaml
+  workflow_dispatch:
+    inputs:
+      deploy_target:
+        description: Deployment stage
+        type: choice
+        default: dev
+        options:
+          - dev
+          - prd
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  lint:
+    name: Run a job
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Do something"
