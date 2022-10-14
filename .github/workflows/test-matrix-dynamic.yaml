@@ -1,0 +1,37 @@
+name: test-matrix-dynamic
+
+on:
+  push:
+    paths:
+      - .github/workflows/test-matrix-dynamic.yaml
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  set-accounts:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "ACCOUNTS=2000,2001" >> $GITHUB_ENV
+          else
+            echo "ACCOUNTS=1000,1001" >> $GITHUB_ENV
+          fi
+
+  check-env:
+    needs: [set-accounts]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ env.ACCOUNTS }}
+
+  job-1:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        account: echo ${{ env.ACCOUNTS }}
+    steps:
+      - name: Run ${{ matrix.account }}
+        run: echo ${{ matrix.account }}
