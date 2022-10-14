@@ -12,19 +12,19 @@ defaults:
 
 jobs:
   job-1:
-    name: Running job-1
+    name: Run job-1
     runs-on: ubuntu-latest
     strategy:
       matrix:
         account: [Account1, Account2]
 
     steps:
-      - if: ${{ matrix.account ==  'Account2' }}
-        name: Running ${{ matrix.account }} step 1
+      - name: Run step if account == Account2? ${{ matrix.account }}
+        if: ${{ matrix.account == "Account2" }}
         run: |
           echo "Running ${{ matrix.account }} step 1"
 
-      - name: Running ${{ matrix.account }} step 2
+      - name: Check if in step-run
         run: |
           if [[ "${{ matrix.account }}" == "Account1" ]]; then
             echo "Hello Account1"
@@ -32,15 +32,14 @@ jobs:
             echo "Hello Account2"
           fi
 
-      - if: ${{ always() }}
-        name: Running ${{ matrix.account }} step 3
+      - name: Run always
+        if: ${{ always() }}
         run: |
           echo "Running ${{ matrix.account }} step 3"
 
   job-last:
-    name: Deployment End
-    runs-on: ubuntu-latest
     if: ${{ always() }}
+    runs-on: ubuntu-latest
     needs:
       - job-1
     steps:
