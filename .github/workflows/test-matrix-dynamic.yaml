@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        account: echo ${{ env.ACCOUNTS }}
+        account: ${{ env.ACCOUNTS }}
     steps:
       - name: Run ${{ matrix.account }}
         run: echo ${{ matrix.account }}
