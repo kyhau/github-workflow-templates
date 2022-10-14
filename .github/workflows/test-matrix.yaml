@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Run step if account == Account2? ${{ matrix.account }}
-        if: ${{ matrix.account == "Account2" }}
+        if: ${{ matrix.account == 'Account2' }}
         run: |
           echo "Running ${{ matrix.account }} step 1"
 
