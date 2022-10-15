@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        account: [ ${{ fromJson(needs.settings.outputs.accounts) }} ]
+        account: ${{ fromJson(needs.settings.outputs.accounts) }}
     steps:
       - name: Run ${{ matrix.account }}
         run: echo ${{ matrix.account }}
