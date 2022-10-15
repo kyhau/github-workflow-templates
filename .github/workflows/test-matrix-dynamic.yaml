@@ -24,7 +24,7 @@ jobs:
           fi
 
   check-env:
-    needs: [set-accounts]
+    needs: [settings]
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{ needs.settings.outputs.accounts }}
