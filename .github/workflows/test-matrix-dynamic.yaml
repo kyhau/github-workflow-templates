@@ -18,9 +18,9 @@ jobs:
     steps:
       - run: |
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            echo "ACCOUNTS=["21","22","23"]" >> $GITHUB_ENV
+            echo 'ACCOUNTS=["21","22","23"]' >> $GITHUB_ENV
           else
-            echo "ACCOUNTS=["11","12","13"]" >> $GITHUB_ENV
+            echo 'ACCOUNTS=["11","12","13"]' >> $GITHUB_ENV
           fi
 
   check-env:
