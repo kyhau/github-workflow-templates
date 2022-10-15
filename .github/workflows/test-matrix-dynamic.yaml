@@ -30,11 +30,11 @@ jobs:
       - run: echo ${{ needs.settings.outputs.accounts }}
 
   job-1:
-    needs: [check-env]
+    needs: [settings]
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        account: ["123"]
+        account: [ ${{ needs.settings.outputs.accounts }} ]
     steps:
       - name: Run ${{ matrix.account }}
         run: echo ${{ matrix.account }}
