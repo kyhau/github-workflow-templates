@@ -11,11 +11,12 @@ defaults:
     shell: bash
 
 jobs:
-  set-accounts:
+  settings:
     runs-on: ubuntu-latest
+    outputs:
+      accounts: ${{ env.ACCOUNTS }}
     steps:
-      - id: setenv-1
-        run: |
+      - run: |
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
             echo "ACCOUNTS=2000,2001" >> $GITHUB_ENV
           else
@@ -26,7 +27,7 @@ jobs:
     needs: [set-accounts]
     runs-on: ubuntu-latest
     steps:
-      - run: echo ${{ env.ACCOUNTS }}
+      - run: echo ${{ needs.settings.outputs.accounts }}
 
   job-1:
     needs: [check-env]
