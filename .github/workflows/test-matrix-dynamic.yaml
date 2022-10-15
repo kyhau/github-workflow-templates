@@ -14,7 +14,8 @@ jobs:
   set-accounts:
     runs-on: ubuntu-latest
     steps:
-      - run: |
+      - id: setenv-1
+        run: |
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
             echo "ACCOUNTS=2000,2001" >> $GITHUB_ENV
           else
