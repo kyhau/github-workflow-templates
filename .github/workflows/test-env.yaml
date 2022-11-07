@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: aws s3 ls
+        continue-on-error: true
       - run: echo "CheckPt2"
   hello2:
     needs: hello1
