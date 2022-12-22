@@ -42,7 +42,7 @@ jobs:
         id: VpcInfo
         run: |
           SOME_DYNAMIC_VALUE=vpc-11111111
-          echo "::set-output name=vpcid::${SOME_DYNAMIC_VALUE}"
+          echo "vpcid=${SOME_DYNAMIC_VALUE}" >> $GITHUB_OUTPUT
       - name: Use the value (output ***)
         run: |
           echo "::add-mask::${{ steps.VpcInfo.outputs.vpcid }}"

@@ -48,7 +48,7 @@ jobs:
           s3_obj_key=app/example/${zip_filename}
           zip -j ${zip_filename} ./lambda/example-function.py
           aws s3 cp ${zip_filename} s3://${{ env.bucket-name }}/${s3_obj_key}
-          echo "::set-output name=S3Key::${s3_obj_key}"
+          echo "S3Key=${s3_obj_key}" >> $GITHUB_OUTPUT
 
       - name: Remove lambda archives
         run: rm -f *.zip
