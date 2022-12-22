@@ -28,11 +28,11 @@ jobs:
         # if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
         run: |
           if [[ "${{ github.event.inputs.deploystage }}" == "prd" ]]; then
-            echo "::set-output name=environment::prd"
-            echo "::set-output name=stacksuffix::"
+            echo "environment=prd" >> $GITHUB_OUTPUT
+            echo "stacksuffix=" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=environment::dev"
-            echo "::set-output name=stacksuffix::-dev"
+            echo "environment=dev" >> $GITHUB_OUTPUT
+            echo "stacksuffix=-dev" >> $GITHUB_OUTPUT
           fi
 
   echo-common:
@@ -55,12 +55,12 @@ jobs:
         run: |
           if [[ "${{ github.event.inputs.deploystage }}" == "prd" ]]
           then
-            echo "::set-output name=vpcid::vpc-11111111"
-            echo "::set-output name=subnetid::subnet-11111111"
+            echo "vpcid=vpc-11111111" >> $GITHUB_OUTPUT
+            echo "subnetid=subnet-11111111" >> $GITHUB_OUTPUT
           elif [[ "${{ github.event.inputs.deploystage }}" == "dev" ]]
           then
-            echo "::set-output name=vpcid::vpc-22222222"
-            echo "::set-output name=subnetid::subnet-22222222"
+            echo "vpcid=vpc-22222222" >> $GITHUB_OUTPUT
+            echo "subnetid=subnet-22222222" >> $GITHUB_OUTPUT
           else
             exit 1
           fi
@@ -76,9 +76,9 @@ jobs:
         run: |
           if [[ "${{ github.event.inputs.deploystage }}" != "prd" ]]
           then
-            echo "::set-output name=suffix::-dev"
+            echo "suffix=-dev" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=suffix::"
+            echo "suffix=" >> $GITHUB_OUTPUT
           fi
       - run: |
           echo "hello${{ steps.StackNameVariant.outputs.suffix }}world"
