@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo '::add-mask::${{inputs.HELLO1}}'
+          echo "::add-mask::${{ inputs.HELLO1 }}"
 
   test-1:
     needs: [masking-inputs]
