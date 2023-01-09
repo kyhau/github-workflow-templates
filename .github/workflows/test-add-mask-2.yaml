@@ -22,10 +22,10 @@ jobs:
           echo '::add-mask::${{inputs.HELLO1}}'
 
   test-1:
-    name: Deploying API Secret
     needs: [masking-inputs]
     runs-on: ubuntu-latest
     env:
       HELLO1: ${{ inputs.HELLO1 }}
     steps:
       - run: echo ${{ inputs.HELLO1 }}
+      - run: echo ${{ env.HELLO1 }}
