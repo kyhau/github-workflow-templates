@@ -1,5 +1,6 @@
-name: test_env_file_to_github_env
+name: test-env-file-to-github-env
 on:
+  push:
   workflow_dispatch:
 
 defaults:
