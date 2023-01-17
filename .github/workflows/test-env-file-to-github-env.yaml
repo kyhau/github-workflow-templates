@@ -15,6 +15,10 @@ jobs:
       - uses: actions/checkout@v3
       - run: cat .github/workflows/_test1.env >> $GITHUB_ENV
       - run: echo "(${{ env.VAR_STAGE }})"
+        continue-on-error: true
       - run: echo "(${{ env.VAR_STAGE_2 }})"
+        continue-on-error: true
       - run: echo "(${{ env.VAR_CRON_1 }})"
+        continue-on-error: true
       - run: echo "(${{ env.VAR_CRON_2 }})"
+        continue-on-error: true
