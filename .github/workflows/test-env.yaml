@@ -47,5 +47,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo ": ${{ ${VAR_PREFIX}_VAR }}"
+          echo "${{ env.{VAR_PREFIX}_VAR }}"
 
