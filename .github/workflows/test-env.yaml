@@ -9,6 +9,8 @@ on:
 
 env:
   WF_ENV: Available on all jobs
+  VAR_PREFIX: Test101
+  Test101_VAR: Hello World
 
 jobs:
   log-env:
@@ -41,3 +43,9 @@ jobs:
           echo "WF_ENV: ${WF_ENV}"
           echo "JOB_ENV: ${JOB_ENV}"
           echo "STEP_ENV: ${STEP_ENV}"
+  test-env:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo ": ${{ ${VAR_PREFIX}_VAR }}"
+
