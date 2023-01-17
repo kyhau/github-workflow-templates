@@ -43,12 +43,12 @@ jobs:
           echo "STEP_ENV: ${STEP_ENV}"
   test-env-defined:
     runs-on: ubuntu-latest
-    if: ${{ env.WF_ENV }}
+    if: env.WF_ENV
     steps:
       - run: echo "${{ env.WF_ENV }}"
   test-env-notdefined:
     runs-on: ubuntu-latest
-    if: ${{ env.NOTDEFINED }}
+    if: env.NOTDEFINED
     steps:
       - run: echo "NOT HERE"
 
