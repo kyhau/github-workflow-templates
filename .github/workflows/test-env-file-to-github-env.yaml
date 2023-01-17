@@ -18,16 +18,8 @@ jobs:
       - run: echo "(${{ env.VAR_STAGE }})"
 
       - run: echo "(${{ env.VAR_STAGE_2 }})"
-        continue-on-error: true
-
-      - run: echo "(${{ env.VAR_CRON_2 }})"
-        continue-on-error: true
-
-      - run: echo (${{ env.VAR_CRON_2 }})
-        continue-on-error: true
 
       - run: echo "(${{ env.VAR_CRON_1 }})"
         continue-on-error: true
 
-      - run: echo (${{ env.VAR_CRON_1 }})
-        continue-on-error: true
+      - run: echo "(${{ env.VAR_CRON_2 }})"
