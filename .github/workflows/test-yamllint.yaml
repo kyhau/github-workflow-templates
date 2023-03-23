@@ -28,3 +28,6 @@ jobs:
       - name: Run yamllint
         run: |
           yamllint -d "{extends: relaxed, rules: {document-start: disable, line-length: disable, truthy: disable}}" .github/
+
+      - run: |
+           [ ! -x "$(command -v yamllint)" ] || echo "INFO: yamllint version: $(yamllint --version)"
