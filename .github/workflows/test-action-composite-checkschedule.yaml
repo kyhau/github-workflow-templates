@@ -1,0 +1,38 @@
+name: test-action-composite-checkschedule
+
+on:
+  push:
+  schedule:
+    # Trigger every Monday, then checkschedule will check if today is within the first 7 days
+    - cron: '0 0 * * mon'
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  check-schedule:
+    outputs:
+      continue-to-run: ${{ steps.checkschedule.outputs.continue-to-run }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/checkschedule
+        id: checkschedule
+
+  do-more-work:
+    if: needs.check-schedule.outputs.continue-to-run == 'true'
+    needs:
+      - check-schedule
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run something
+        run: echo "Hello world"
+
+  print-value:
+    needs:
+      - check-schedule
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "continue-to-run = ${{ needs.check-schedule.outputs.continue-to-run }}"
