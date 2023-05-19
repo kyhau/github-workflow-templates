@@ -57,16 +57,19 @@ jobs:
           then
             echo "vpcid=vpc-11111111" >> $GITHUB_OUTPUT
             echo "subnetid=subnet-11111111" >> $GITHUB_OUTPUT
+            echo "filtervalue=AccountName!=test1 AccountName!=test2" >> $GITHUB_OUTPUT
           elif [[ "${{ github.event.inputs.deploystage }}" == "dev" ]]
           then
             echo "vpcid=vpc-22222222" >> $GITHUB_OUTPUT
             echo "subnetid=subnet-22222222" >> $GITHUB_OUTPUT
+            echo "filtervalue=AccountName=test1 AccountName=test2" >> $GITHUB_OUTPUT
           else
             exit 1
           fi
       - run: |
           echo ${{ steps.VpcInfo.outputs.subnetid }}
           echo ${{ steps.VpcInfo.outputs.vpcid }}
+          echo ${{ steps.VpcInfo.outputs.filtervalue }}
 
   test-empty-value:
     name: Test passing empty value
