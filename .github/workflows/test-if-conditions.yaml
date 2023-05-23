@@ -28,7 +28,7 @@ jobs:
 
   at-job-2:
     name: Test if-not-condition at job
-    if: ! ( github.ref != 'refs/heads/main' && "${{ inputs.deploystage }}" == "dev" )
+    if: ! ( ${{ github.ref == 'refs/heads/main' }} && "${{ inputs.deploystage }}" == "dev" )
     runs-on: ubuntu-latest
     steps:
       - run: |
