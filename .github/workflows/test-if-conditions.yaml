@@ -41,12 +41,12 @@ jobs:
           echo This is a branch - ${{ github.ref }}
 
       - name: Test step multi conditions main and prd
-        if: ${{ (github.ref == 'refs/heads/main') && (github.event.inputs.deploystage == 'prd') }}
+        if: ${{ (github.ref == 'refs/heads/main') && (inputs.deploystage == 'prd') }}
         run: |
           echo Do something on this branch ${{ github.ref }} only for prd
 
       - name: Test step multi conditions with always and prd
-        if: ${{ always() && github.event.inputs.deploystage == 'prd' }}
+        if: ${{ always() && inputs.deploystage == 'prd' }}
         run: |
           echo Do something on this branch ${{ github.ref }} only for prd
 
@@ -55,12 +55,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: vars
-        # if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
         run: |
-          if [[ "${{ github.event.inputs.deploystage }}" == "prd" ]]; then
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]] && [[ "${{ inputs.deploystage }}" == "prd" ]]; then
+            echo "CheckPt A - main branch + prd"
+            echo "environment=prd" >> $GITHUB_OUTPUT
+            echo "stacksuffix=" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "CheckPt B - main branch + dev"
             echo "environment=prd" >> $GITHUB_OUTPUT
             echo "stacksuffix=" >> $GITHUB_OUTPUT
           else
+            echo "CheckPt C - other branch"
             echo "environment=dev" >> $GITHUB_OUTPUT
             echo "stacksuffix=-dev" >> $GITHUB_OUTPUT
           fi
