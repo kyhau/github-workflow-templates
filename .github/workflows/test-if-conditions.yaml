@@ -26,6 +26,14 @@ jobs:
       - run: |
           echo Do something on this branch ${{ github.ref }} only for prd
 
+  at-job-2:
+    name: Test if-not-condition at job
+    if: ! ( github.ref == 'refs/heads/main' && "${{ inputs.accountEnv }}" == "dev" )
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo Do not run this if this is the main branch and is dev
+
   at-step:
     name: Test if-condition at step
     runs-on: ubuntu-latest
