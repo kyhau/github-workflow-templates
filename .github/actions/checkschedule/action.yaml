@@ -1,4 +1,4 @@
-name: Check Schedule
+name: Check schedule
 description: Check if today is within the first week of the month
 
 outputs:
