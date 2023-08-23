@@ -1,6 +1,8 @@
 name: test-env-file-to-github-env
 on:
   push:
+    paths:
+      - .github/workflows/test-env-file-to-github-env.yaml
   workflow_dispatch:
 
 defaults:
