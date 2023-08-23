@@ -2,6 +2,8 @@ name: test-action-composite-checkschedule
 
 on:
   push:
+    paths:
+      - .github/workflows/test-action-composite-checkschedule.yaml
   schedule:
     # Trigger every Monday, then checkschedule will check if today is within the first 7 days
     - cron: '0 0 * * mon'
