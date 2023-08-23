@@ -1,0 +1,17 @@
+name: test-action-setup-dotnet
+
+on:
+  push:
+    paths:
+      - .github/workflows/test-action-setup-dotnet.yaml
+  workflow_dispatch:
+
+jobs:
+  test-job:
+    env:
+      DOTNET_INSTALL_DIR: "./.dotnet"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.x
