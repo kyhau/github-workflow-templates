@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: aws-actions/configure-aws-credentials@v2.2.0
+      - uses: aws-actions/configure-aws-credentials@v3.0.2
         with:
           aws-region: ${{ env.region }}
           role-duration-seconds: 3600
