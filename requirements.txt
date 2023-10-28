@@ -1,9 +1,2 @@
 # For testing snyk python
-boto3
-
-# Snyk has identified a bug with the usage of the latest versions of setuptools that is causing import and testing issues.
-# This is an example error message when testing a project from the CLI:
-# Failed to test pip project
-# See also https://support.snyk.io/hc/en-us/articles/9637130622109-Python-project-test-and-or-import-fail
-# Workaround:
-setuptools < 67
+boto3~=1.28
