@@ -18,6 +18,8 @@ jobs:
         uses: snyk/actions/python@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command: debug
 
   security-2:
     runs-on: ubuntu-latest
@@ -31,6 +33,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --all-projects --severity-threshold=high --sarif-file-output=snyk.sarif
+          command: debug
 
 # - name: Upload result to GitHub Code Scanning
 # uses: github/codeql-action/upload-sarif@v2
