@@ -13,7 +13,7 @@ jobs:
       # source: https://github.com/temporalio/sdk-python/pull/172/files#diff-e0c5149ab771083cacddbeaf3336656118f582f6311228e0b8652c3209a7dd2eR32-R39
       # actions/setup-python doesn't yet support ARM
       - if: ${{ !endsWith(matrix.os, '-arm') }}
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
       - if: ${{ matrix.os == 'ubuntu-arm' }}
