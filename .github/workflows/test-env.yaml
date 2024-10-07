@@ -42,6 +42,7 @@ jobs:
           echo "JOB_ENV: ${JOB_ENV}"
           echo "STEP_ENV: ${STEP_ENV}"
           echo "OSTYPE: ${OSTYPE}"
+          echo "uname: " $(uname)
   test-env-defined:
     runs-on: ubuntu-latest
     steps:
