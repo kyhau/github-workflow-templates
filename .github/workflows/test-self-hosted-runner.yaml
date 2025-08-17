@@ -28,7 +28,7 @@ jobs:
         accountid: ["123456789012"]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: aws-actions/configure-aws-credentials@v4.3.1
         with:
