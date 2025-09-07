@@ -12,6 +12,6 @@ jobs:
       DOTNET_INSTALL_DIR: "./.dotnet"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 6.x
