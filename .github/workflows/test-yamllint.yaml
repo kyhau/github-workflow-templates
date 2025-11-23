@@ -16,7 +16,7 @@ jobs:
     name: Run yamllint with common config
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Run yamllint
         run: yamllint -c .github/linters/.yaml-lint.yaml .github/
 
@@ -24,7 +24,7 @@ jobs:
     name: Run yamllint without config
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Run yamllint
         run: |
           yamllint -d "{extends: relaxed, rules: {document-start: disable, line-length: disable, truthy: disable}}" .github/
