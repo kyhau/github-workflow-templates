@@ -54,7 +54,7 @@ jobs:
         run: rm -f *.zip
 
       - name: Deploy main stack
-        uses: aws-actions/aws-cloudformation-github-deploy@v1
+        uses: aws-actions/aws-cloudformation-github-deploy@v2
         with:
           name: k-example-api
           template: ./cf/example-app.yaml
